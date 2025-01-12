@@ -1,3 +1,3 @@
 # SkateFallRetry
 
-## A colaborative learning platform for SkateBoarding
+## A collaborative learning platform for SkateBoarding
