@@ -1,3 +1,6 @@
+# SkateFallRetry Class Diagram
+
+```mermaid
 classDiagram
     class User {
         - id: UUID
