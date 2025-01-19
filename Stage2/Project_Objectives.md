@@ -1,4 +1,4 @@
-# Deliverable Section: Project Purpose and Objectives
+# Project Purpose and Objectives
 
 ## Purpose:
 
