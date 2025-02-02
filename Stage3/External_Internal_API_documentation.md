@@ -18,7 +18,7 @@ Here are the **external APIs** that the project will use:
 
 ---
 
-### **✅ User API Endpoints**
+### ** User API Endpoints**
 | **Endpoint** | **Method** | **Input Format** | **Output Format** | **Description** |
 |-------------|-----------|------------------|------------------|----------------|
 | `/api/users/register` | `POST` | `{ "username": "user", "password": "pass" }` | `{ "message": "User created", "user_id": 1 }` | Register a new user |
@@ -27,7 +27,7 @@ Here are the **external APIs** that the project will use:
 
 ---
 
-### **✅ Post API Endpoints**
+### ** Post API Endpoints**
 | **Endpoint** | **Method** | **Input Format** | **Output Format** | **Description** |
 |-------------|-----------|------------------|------------------|----------------|
 | `/api/posts` | `POST` | `{ "title": "Skate Trick", "content": "Any skate trick", "video_url": "http://..." }` | `{ "message": "Post created", "post_id": 1 }` | Create a new post |
@@ -37,7 +37,7 @@ Here are the **external APIs** that the project will use:
 
 ---
 
-### **✅ Comment API Endpoints**
+### ** Comment API Endpoints**
 | **Endpoint** | **Method** | **Input Format** | **Output Format** | **Description** |
 |-------------|-----------|------------------|------------------|----------------|
 | `/api/comments` | `POST` | `{ "content": "Nice trick!", "post_id": 1 }` | `{ "message": "Comment created", "comment_id": 1 }` | Create a new comment |
@@ -46,7 +46,7 @@ Here are the **external APIs** that the project will use:
 
 ---
 
-### **✅ Video API Endpoints**
+### ** Video API Endpoints**
 | **Endpoint** | **Method** | **Input Format** | **Output Format** | **Description** |
 |-------------|-----------|------------------|------------------|----------------|
 | `/api/videos` | `POST` | `{ "url": "http://video.mp4", "post_id": 1 }` | `{ "message": "Video uploaded", "video_id": 1 }` | Upload a video for a post |
