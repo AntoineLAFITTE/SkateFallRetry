@@ -23,10 +23,10 @@ erDiagram
     VIDEO {
         int id PK
         string url "Not Null"
-        int post_id FK
+        int post_id FK "Nullable"
     }
 
     USER ||--o{ POST : "creates"
     USER ||--o{ COMMENT : "writes"
     POST ||--o{ COMMENT : "has"
-    POST ||--o{ VIDEO : "contains"
+    POST ||--|{ VIDEO : "may have"
