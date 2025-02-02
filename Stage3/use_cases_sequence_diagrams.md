@@ -1,5 +1,5 @@
 ### **1️⃣ Sequence Diagram: User Logs In**
-```markdown
+
 ```mermaid
 sequenceDiagram
     participant User
@@ -17,7 +17,7 @@ sequenceDiagram
 ---
 
 ### **2️⃣ Sequence Diagram: User Creates a Post**
-```markdown
+
 ```mermaid
 sequenceDiagram
     participant User
@@ -35,7 +35,7 @@ sequenceDiagram
 ---
 
 ### **3️⃣ Sequence Diagram: User Comments on a Post**
-```markdown
+
 ```mermaid
 sequenceDiagram
     participant User
