@@ -20,6 +20,13 @@ erDiagram
         int user_id FK
     }
 
+    VIDEO {
+        int id PK
+        string url "Not Null"
+        int post_id FK
+    }
+
     USER ||--o{ POST : "creates"
     USER ||--o{ COMMENT : "writes"
     POST ||--o{ COMMENT : "has"
+    POST ||--o{ VIDEO : "contains"
