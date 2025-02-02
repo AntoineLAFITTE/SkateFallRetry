@@ -3,7 +3,7 @@ erDiagram
     USER {
         int id PK
         string username "Unique, Not Null"
-        string password "Not Null"
+        string password_hash "Not Null"
     }
 
     POST {
@@ -23,10 +23,10 @@ erDiagram
     VIDEO {
         int id PK
         string url "Not Null"
-        int post_id FK "Nullable"
+        int post_id FK
     }
 
     USER ||--o{ POST : "creates"
     USER ||--o{ COMMENT : "writes"
     POST ||--o{ COMMENT : "has"
-    POST ||--|{ VIDEO : "may have"
+    POST ||--o{ VIDEO : "may have"
