@@ -1,6 +1,4 @@
 from models import db  # Import db from models/__init__.py
-from models.user import User
-from models.post import Post
 
 
 class Comment(db.Model):

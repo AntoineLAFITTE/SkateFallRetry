@@ -2,29 +2,26 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-from flask_login import LoginManager
+from flask_jwt_extended import JWTManager  # Import JWTManager
 from config import Config
 from models import db  # Import only db, not individual models
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# Initialize JWT (after app configuration)
+jwt = JWTManager(app)
+
 # Initialize Database and Extensions
 db.init_app(app)
 migrate = Migrate(app, db)
-login_manager = LoginManager(app)
-login_manager.login_view = 'auth.login'
-CORS(app)
+CORS(app)  # Keep CORS enabled
 
 # Import models after initializing db to prevent circular import
 from models.user import User
 from models.post import Post
 from models.comment import Comment
 from models.video import Video
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 # Register Blueprints
 from routes.auth import auth_bp
