@@ -1,5 +1,4 @@
 from models import db  # Import db from models/__init__.py
-from models.post import Post
 
 
 class Video(db.Model):
