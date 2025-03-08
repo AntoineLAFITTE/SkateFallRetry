@@ -32,40 +32,51 @@ const Home = () => {
         }
     };
 
-    //  Ensure comments are initialized properly when selecting a post
-    const handleSelectPost = (post) => {
-        setSelectedPost({
-            ...post,
-            comments: post.comments || [],  // Ensure comments are initialized to an empty array if null
-        });
+    // Function to handle selecting a post from the sidebar
+    const handleSelectPost = async (post) => {
+        setSelectedPost(null); // Clear the previous post while fetching new comments
+
+        const token = localStorage.getItem("token");
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/posts/${post.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const updatedPost = await response.json();
+            setSelectedPost(updatedPost); // Load post with comments
+        } catch (error) {
+            console.error("Error fetching post details:", error);
+        }
     };
 
     const handleAddComment = async (text) => {
         if (!selectedPost) return;
 
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         const response = await fetch(`http://127.0.0.1:5000/api/comments/create`, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify({ content: text, post_id: selectedPost.id })
+            body: JSON.stringify({ content: text, post_id: selectedPost.id }),
         });
 
         if (response.ok) {
+            const newComment = { user: "You", text };
             setSelectedPost({
                 ...selectedPost,
-                comments: [...selectedPost.comments, { user: 'You', text }]
+                comments: [...selectedPost.comments, newComment],
             });
         }
     };
 
     return (
         <>
-            <Header /> {/* Include the header at the top */}
-            <div style={{ display: 'flex', background: '#121212', height: '100vh', color: 'white' }}>
-                <Sidebar posts={posts} onSelectPost={handleSelectPost} /> {/* Use handleSelectPost instead of setSelectedPost */}
+            <Header />
+            <div style={{ display: "flex", background: "#121212", height: "100vh", color: "white" }}>
+                <Sidebar posts={posts} onSelectPost={handleSelectPost} />
                 <PostDetails post={selectedPost} onAddComment={handleAddComment} />
             </div>
         </>
