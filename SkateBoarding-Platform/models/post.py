@@ -6,28 +6,31 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    category = db.Column(db.String(50), nullable=False)  # Added category field
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     comments = db.relationship('Comment', backref='post', lazy=True, cascade="all, delete-orphan")
     video = db.relationship('Video', backref='post', uselist=False, cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f"<Post {self.title}>"
+        return f"<Post {self.title} - {self.category}>"
 
     @classmethod
-    def create_post(cls, title, content, user_id):
+    def create_post(cls, title, content, category, user_id):
         """Creates a new post and saves it to the database."""
-        new_post = cls(title=title, content=content, user_id=user_id)
+        new_post = cls(title=title, content=content, category=category, user_id=user_id)
         db.session.add(new_post)
         db.session.commit()
         return new_post
 
-    def update_post(self, title=None, content=None):
-        """Updates the post's title or content."""
+    def update_post(self, title=None, content=None, category=None):
+        """Updates the post's title, content, or category."""
         if title:
             self.title = title
         if content:
             self.content = content
+        if category:
+            self.category = category
         db.session.commit()
 
     def delete_post(self):

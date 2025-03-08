@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import PostDetails from "../components/PostDetails";
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
+    const [selectedPost, setSelectedPost] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,7 +20,7 @@ const Home = () => {
 
     const fetchPosts = async (token) => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/posts", {
+            const response = await fetch("http://127.0.0.1:5000/api/posts/", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -28,19 +32,35 @@ const Home = () => {
         }
     };
 
+    const handleAddComment = async (text) => {
+        if (!selectedPost) return;
+
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://127.0.0.1:5000/api/comments/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content: text, post_id: selectedPost.id })
+        });
+
+        if (response.ok) {
+            setSelectedPost({
+                ...selectedPost,
+                comments: [...selectedPost.comments, { user: 'You', text }]
+            });
+        }
+    };
+
     return (
-        <div>
-            <h1>Welcome to SkateFallRetry !</h1>
-            <h2>All Posts</h2>
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.id}>
-                        <h3>{post.title}</h3>
-                        <p>{post.content}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <Header /> {/* Include the header at the top */}
+            <div style={{ display: 'flex', background: '#121212', height: '100vh', color: 'white' }}>
+                <Sidebar posts={posts} onSelectPost={setSelectedPost} />
+                <PostDetails post={selectedPost} onAddComment={handleAddComment} />
+            </div>
+        </>
     );
 };
 
