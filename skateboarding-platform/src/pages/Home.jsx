@@ -32,11 +32,19 @@ const Home = () => {
         }
     };
 
+    //  Ensure comments are initialized properly when selecting a post
+    const handleSelectPost = (post) => {
+        setSelectedPost({
+            ...post,
+            comments: post.comments || [],  // Ensure comments are initialized to an empty array if null
+        });
+    };
+
     const handleAddComment = async (text) => {
         if (!selectedPost) return;
 
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://127.0.0.1:5000/api/comments/`, {
+        const response = await fetch(`http://127.0.0.1:5000/api/comments/create`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -57,7 +65,7 @@ const Home = () => {
         <>
             <Header /> {/* Include the header at the top */}
             <div style={{ display: 'flex', background: '#121212', height: '100vh', color: 'white' }}>
-                <Sidebar posts={posts} onSelectPost={setSelectedPost} />
+                <Sidebar posts={posts} onSelectPost={handleSelectPost} /> {/* Use handleSelectPost instead of setSelectedPost */}
                 <PostDetails post={selectedPost} onAddComment={handleAddComment} />
             </div>
         </>
