@@ -16,7 +16,27 @@ const PostDetails = ({ post, onAddComment }) => {
         <div style={styles.container}>
             <h2 style={styles.title}>{post.title}</h2>
             <p style={styles.content}>{post.content}</p>
-            {post.video_url && <video controls src={post.video_url} style={styles.video} />}
+
+            {/* Video Handling */}
+            {post.video_url && (
+                post.video_url.includes("youtube.com") ? (
+                    <iframe
+                        width="100%"
+                        height="400px"
+                        src={post.video_url.replace("watch?v=", "embed/")}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={styles.video}
+                    ></iframe>
+                ) : (
+                    <video controls style={styles.video}>
+                        <source src={post.video_url} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                )
+            )}
 
             <h3>Comments</h3>
             {post.comments && post.comments.length > 0 ? (
