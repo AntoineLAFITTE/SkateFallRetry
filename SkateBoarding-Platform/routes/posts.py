@@ -6,28 +6,29 @@ from models.user import User
 posts_bp = Blueprint('posts', __name__)
 
 @posts_bp.route('/create', methods=['POST'])
-@jwt_required()  # Use JWT authentication
+@jwt_required()
 def create_post():
-    """Creates a new post."""
+    """Creates a new post with optional video_url."""
     data = request.get_json()
 
     if not data or not data.get('title') or not data.get('content') or not data.get('category'):
         return jsonify({'error': 'Title, content, and category are required'}), 400
 
-    user_id = get_jwt_identity()  # Get user ID from JWT token
+    user_id = get_jwt_identity()
 
     post = Post.create_post(
         title=data['title'],
         content=data['content'],
-        category=data['category'],  # Added category
-        user_id=user_id
+        category=data['category'],
+        user_id=user_id,
+        video_url=data.get('video_url')  # Optional
     )
     return jsonify({'message': 'Post created successfully', 'post_id': post.id}), 201
 
 @posts_bp.route('/<int:post_id>', methods=['PUT'])
 @jwt_required()
 def update_post(post_id):
-    """Updates a post."""
+    """Updates a post, including video_url."""
     post = Post.query.get_or_404(post_id)
     user_id = get_jwt_identity()
 
@@ -39,9 +40,10 @@ def update_post(post_id):
         return jsonify({'error': 'No data provided'}), 400
 
     post.update_post(
-        title=data.get('title', post.title),  # Default to existing title if not provided
-        content=data.get('content', post.content),  # Default to existing content if not provided
-        category=data.get('category', post.category)  # Default to existing category if not provided
+        title=data.get('title', post.title),
+        content=data.get('content', post.content),
+        category=data.get('category', post.category),
+        video_url=data.get('video_url', post.video_url)  # Update or keep existing
     )
     return jsonify({'message': 'Post updated successfully'}), 200
 
@@ -61,7 +63,7 @@ def delete_post(post_id):
 @posts_bp.route('/', methods=['GET'])
 @jwt_required()
 def get_all_posts():
-    """Retrieve all posts with associated videos"""
+    """Retrieve all posts, including video_url."""
     posts = Post.query.all()
     posts_data = [{
         "id": post.id,
@@ -69,8 +71,7 @@ def get_all_posts():
         "content": post.content,
         "category": post.category,
         "user_id": post.user_id,
-        "has_video": post.video is not None,  # True if post has a video, False otherwise
-        "video_url": post.video.url if post.video else None  # Include video URL if exists
+        "video_url": post.video_url  # Include video_url
     } for post in posts]
 
     return jsonify(posts_data), 200
@@ -78,7 +79,7 @@ def get_all_posts():
 @posts_bp.route('/<int:post_id>', methods=['GET'])
 @jwt_required()
 def get_post_by_id(post_id):
-    """Retrieve a single post by ID, including comments and usernames"""
+    """Retrieve a single post, including video_url and comments."""
     post = Post.query.get_or_404(post_id)
 
     post_data = {
@@ -87,9 +88,10 @@ def get_post_by_id(post_id):
         "content": post.content,
         "category": post.category,
         "user_id": post.user_id,
+        "video_url": post.video_url,  # Include video_url
         "comments": [
             {
-                "user": User.query.get(comment.user_id).username,  # Get username from User table
+                "user": User.query.get(comment.user_id).username,
                 "text": comment.content
             }
             for comment in post.comments
