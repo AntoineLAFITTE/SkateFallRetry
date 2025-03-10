@@ -46,7 +46,7 @@ const Register = () => {
                     style={styles.input}
                 />
                 <button type="submit" style={styles.button}>Register</button>
-                <button type="button" style={styles.loginButton} onClick={() => navigate('/')}>
+                <button type="button" style={styles.loginButton} onClick={() => navigate('/login')}>
                     Back to Login
                 </button>
             </form>
