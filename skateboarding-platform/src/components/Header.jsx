@@ -10,7 +10,7 @@ const Header = () => {
 
     return (
         <header style={styles.header}>
-            <h1 style={styles.logo}>SkateFallRetry</h1>
+            <img src="public/assets/SkateFallRetryLogo-Photoroom.png" alt="SFR Logo" style={styles.logoImage} />
             <h1 className="header-title">Skate Fall Retry</h1> {/* Custom font applied */}
             <nav style={styles.nav}>
                 <Link to="/home" style={styles.link}>Home</Link>
@@ -33,6 +33,11 @@ const styles = {
         position: "sticky",
         top: "0",
         zIndex: "1000",
+    },
+    logoImage: {
+      width: "125px", // Adjust size of the logo
+      height: "125px",
+      objectFit: "contain",
     },
     logo: {
         fontSize: "1.8rem",
