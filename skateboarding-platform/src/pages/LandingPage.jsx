@@ -2,23 +2,27 @@ import { AutoSliderBanner } from "../components/AutoSliderBanner";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
-    return (
-        <div style={styles.container}>
-            <AutoSliderBanner />
-            <div style={styles.content}>
-                <h2>Welcome to SkateFallRetry</h2>
-                <p>Your ultimate platform for skateboarding tutorials, tricks, and community discussions.</p>
-                <div style={styles.buttonContainer}>
-                    <Link to="/register">
-                        <button style={styles.button}>Get Started</button>
-                    </Link>
-                    <Link to="/login">
-                        <button style={styles.buttonOutline}>Login</button>
-                    </Link>
-                </div>
-            </div>
-        </div>
-    );
+  return (
+      <div style={styles.container}>
+          <AutoSliderBanner />
+          <div style={styles.content}>
+              <h2>Welcome to SkateFallRetry</h2>
+              <p>
+                  SkateFallRetry is the ultimate platform for skateboarding enthusiasts.
+                  Whether you're a beginner learning your first ollie, an advanced skater perfecting kickflips,
+                  or an expert pushing the limits with technical tricks, our community-driven space has something for everyone.
+              </p>
+              <p>
+                  Explore step-by-step trick tutorials, engage in community discussions,
+                  and share your own progress with fellow skaters. Stay updated with the latest trends,
+                  gear reviews, and competitions in the skateboarding world.
+              </p>
+              <p>
+                  Join us to improve your skills, connect with passionate skaters, and take your skateboarding to the next level!
+              </p>
+          </div>
+      </div>
+  );
 };
 
 // Landing Page Styles

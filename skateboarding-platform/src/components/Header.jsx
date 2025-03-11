@@ -11,6 +11,7 @@ const Header = () => {
     return (
         <header style={styles.header}>
             <h1 style={styles.logo}>SkateFallRetry</h1>
+            <h1 className="header-title">Skate Fall Retry</h1> {/* Custom font applied */}
             <nav style={styles.nav}>
                 <Link to="/home" style={styles.link}>Home</Link>
                 <Link to="/create-post" style={styles.createPostButton}>Create Post</Link>

@@ -47,7 +47,7 @@ export function AutoSliderBanner() {
         </div>
       ))}
       <div className="banner-overlay">
-        <h1 className="banner-title">SkateFallRetry</h1>
+      <h1 className="header-title">Skate Fall Retry</h1>
         <p className="banner-subtitle">Elevate Your Skateboarding to the next level</p>
         <div style={styles.buttonContainer}>
         <button onClick={handleGetStartedClick} className="button button-outline button-lg">
