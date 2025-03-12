@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HeaderLanding from '../components/HeaderLanding';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -27,37 +28,40 @@ const Login = () => {
     };
 
     return (
-        <div style={styles.container}>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin} style={styles.form}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    style={styles.input}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    style={styles.input}
-                />
-                <button type="submit" style={styles.button}>Login</button>
-                <button type="button" style={styles.registerButton} onClick={() => navigate('/register')}>
-                    Register
-                </button>
-            </form>
-        </div>
-    );
+      <>
+          <HeaderLanding />  {/* Header at the top */}
+          <div style={styles.container}>
+              <h1 className="header-title">Login</h1>
+              <form onSubmit={handleLogin} style={styles.form}>
+                  <input
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      style={styles.input}
+                  />
+                  <input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      style={styles.input}
+                  />
+                  <button type="submit" style={styles.button}>Login</button>
+                  <button type="button" style={styles.registerButton} onClick={() => navigate('/register')}>
+                      Register
+                  </button>
+              </form>
+          </div>
+      </>
+  );
 };
 
 // Simple CSS-in-JS styles
 const styles = {
-    container: { textAlign: 'center', marginTop: '50px' },
+    container: { textAlign: 'center', marginTop: '50px', paddingTop: '115px' },
     form: { display: 'flex', flexDirection: 'column', width: '300px', margin: 'auto' },
     input: { margin: '10px 0', padding: '10px', fontSize: '16px' },
     button: { padding: '10px', backgroundColor: '#4CAF50', color: 'white', fontSize: '16px', border: 'none' },

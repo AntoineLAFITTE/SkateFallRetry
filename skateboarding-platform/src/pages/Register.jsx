@@ -27,7 +27,7 @@ const Register = () => {
 
     return (
         <div style={styles.container}>
-            <h2>Register</h2>
+            <h1 className="header-title">Register</h1>
             <form onSubmit={handleRegister} style={styles.form}>
                 <input
                     type="text"
@@ -56,7 +56,7 @@ const Register = () => {
 
 // Simple CSS-in-JS styles
 const styles = {
-    container: { textAlign: 'center', marginTop: '50px' },
+    container: { textAlign: 'center', marginTop: '50px', paddingTop: '115px' },
     form: { display: 'flex', flexDirection: 'column', width: '300px', margin: 'auto' },
     input: { margin: '10px 0', padding: '10px', fontSize: '16px' },
     button: { padding: '10px', backgroundColor: '#4CAF50', color: 'white', fontSize: '16px', border: 'none' },
