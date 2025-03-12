@@ -14,7 +14,7 @@ const Header = () => {
             <h1 className="header-title">Skate Fall Retry</h1> {/* Custom font applied */}
             <nav style={styles.nav}>
                 <Link to="/home" style={styles.link}>Home</Link>
-                <Link to="/create-post" style={styles.createPostButton}>Create Post</Link>
+                <Link to="/create-post" style={styles.createPostButton}>+ New Post</Link>
                 <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
             </nav>
         </header>
@@ -57,7 +57,7 @@ const styles = {
         backgroundColor: "#4CAF50", // Green
         color: "white",
         padding: "8px 15px",
-        fontSize: "1rem",
+        fontSize: "1.125rem",
         borderRadius: "5px",
         textDecoration: "none",
         transition: "background 0.3s",
@@ -66,7 +66,7 @@ const styles = {
         backgroundColor: "#D32F2F", // Red
         color: "white",
         padding: "8px 15px",
-        fontSize: "1rem",
+        fontSize: "1.125rem",
         border: "none",
         borderRadius: "5px",
         cursor: "pointer",
