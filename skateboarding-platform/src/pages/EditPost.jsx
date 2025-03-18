@@ -17,11 +17,16 @@ const EditPost = () => {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 },
             });
-            const data = await response.json();
-            setPost(data);
-            setTitle(data.title);
-            setContent(data.content);
-            setCategory(data.category);
+
+            if (response.ok) {
+                const data = await response.json();
+                setPost(data);
+                setTitle(data.title);
+                setContent(data.content);
+                setCategory(data.category);
+            } else {
+                alert("Error fetching post data.");
+            }
         };
 
         fetchPost();
@@ -41,7 +46,7 @@ const EditPost = () => {
 
         if (response.ok) {
             alert("Post updated successfully!");
-            navigate("/manage-posts"); // Redirect to manage page
+            navigate("/manage-posts");
         } else {
             alert("Error updating post.");
         }
@@ -51,23 +56,41 @@ const EditPost = () => {
         <>
             <Header />
             <div style={styles.container}>
-                <h2>Edit Post</h2>
+                <h2>Edit Your Post</h2>
                 {post ? (
                     <form onSubmit={handleUpdate} style={styles.form}>
-                        <label>Title</label>
-                        <input value={title} onChange={(e) => setTitle(e.target.value)} required />
+                        <label style={styles.label}>Title</label>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                            style={styles.input}
+                        />
 
-                        <label>Content</label>
-                        <textarea value={content} onChange={(e) => setContent(e.target.value)} required />
+                        <label style={styles.label}>Content</label>
+                        <textarea
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            required
+                            style={styles.textarea}
+                        />
 
-                        <label>Category</label>
-                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <label style={styles.label}>Category</label>
+                        <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            style={styles.input}
+                        >
                             <option value="Beginner">Beginner</option>
                             <option value="Advanced">Advanced</option>
                             <option value="Expert">Expert</option>
                         </select>
 
-                        <button type="submit">Update Post</button>
+                        <div style={styles.buttonContainer}>
+                            <button type="submit" style={styles.button}>Update Post</button>
+                            <button type="button" style={styles.cancelButton} onClick={() => navigate("/manage-posts")}>Cancel</button>
+                        </div>
                     </form>
                 ) : (
                     <p>Loading...</p>
@@ -78,8 +101,67 @@ const EditPost = () => {
 };
 
 const styles = {
-    container: { textAlign: "center", marginTop: "50px" },
-    form: { display: "flex", flexDirection: "column", gap: "10px", width: "300px", margin: "auto" },
+    container: {
+        maxWidth: "600px",
+        margin: "50px auto",
+        padding: "20px",
+        background: "#1a1a1a",
+        color: "white",
+        borderRadius: "5px",
+        textAlign: "center",
+    },
+    form: {
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+    },
+    label: {
+        fontSize: "1.2rem",
+        textAlign: "left",
+    },
+    input: {
+        padding: "10px",
+        fontSize: "1rem",
+        borderRadius: "5px",
+        background: "#222",
+        color: "white",
+        border: "1px solid #444",
+    },
+    textarea: {
+        height: "100px",
+        padding: "10px",
+        fontSize: "1rem",
+        borderRadius: "5px",
+        background: "#222",
+        color: "white",
+        border: "1px solid #444",
+    },
+    buttonContainer: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "15px",
+    },
+    button: {
+        padding: "10px",
+        fontSize: "1.2rem",
+        background: "#4CAF50",  // Green (same as CreatePost)
+        color: "white",
+        border: "none",
+        cursor: "pointer",
+        borderRadius: "5px",
+        flex: "1",
+        marginRight: "10px",
+    },
+    cancelButton: {
+        padding: "10px",
+        fontSize: "1.2rem",
+        background: "#D32F2F", // Red for cancel
+        color: "white",
+        border: "none",
+        cursor: "pointer",
+        borderRadius: "5px",
+        flex: "1",
+    },
 };
 
 export default EditPost;

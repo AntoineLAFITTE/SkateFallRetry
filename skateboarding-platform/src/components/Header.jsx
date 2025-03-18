@@ -10,10 +10,10 @@ const Header = () => {
 
     return (
         <header style={styles.header}>
-            <img src="public/assets/SkateFallRetryLogo-Photoroom.png" alt="SFR Logo" style={styles.logoImage} />
+            <img src="/assets/SkateFallRetryLogo-Photoroom.png" alt="SFR Logo" style={styles.logoImage} />
             <h1 className="header-title">Skate Fall Retry</h1> {/* Custom font applied */}
             <nav style={styles.nav}>
-                <Link to="/manage-posts" style={styles.link}>Manage</Link>
+                <Link to="/manage-posts" style={styles.manageButton}>Manage</Link>
                 <Link to="/create-post" style={styles.createPostButton}>+ New Post</Link>
                 <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
             </nav>
@@ -71,6 +71,16 @@ const styles = {
         borderRadius: "5px",
         cursor: "pointer",
         transition: "background 0.3s",
+    },
+    manageButton: {
+      backgroundColor: "#008CBA", // Blue
+      color: "white",
+      padding: "8px 15px",
+      fontSize: "1.125rem",
+      borderRadius: "5px",
+      marginRight: "1px",
+      cursor: "pointer",
+      textDecoration: "none",
     }
 };
 
