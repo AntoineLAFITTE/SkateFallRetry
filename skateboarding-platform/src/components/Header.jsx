@@ -13,7 +13,7 @@ const Header = () => {
             <img src="public/assets/SkateFallRetryLogo-Photoroom.png" alt="SFR Logo" style={styles.logoImage} />
             <h1 className="header-title">Skate Fall Retry</h1> {/* Custom font applied */}
             <nav style={styles.nav}>
-                <Link to="/home" style={styles.link}>Home</Link>
+                <Link to="/manage-posts" style={styles.link}>Manage</Link>
                 <Link to="/create-post" style={styles.createPostButton}>+ New Post</Link>
                 <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
             </nav>
