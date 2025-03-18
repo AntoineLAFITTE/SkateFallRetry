@@ -99,3 +99,25 @@ def get_post_by_id(post_id):
     }
 
     return jsonify(post_data), 200
+
+@posts_bp.route('/my-posts', methods=['GET'])
+@jwt_required()
+def get_user_posts():
+    """Retrieve all posts created by the logged-in user."""
+    user_id = get_jwt_identity()  # Get the logged-in user ID
+
+    user_posts = Post.query.filter_by(user_id=user_id).all()
+
+    if not user_posts:
+        return jsonify({"message": "You haven't created any posts yet."}), 404
+
+    posts_data = [{
+        "id": post.id,
+        "title": post.title,
+        "content": post.content,
+        "category": post.category,
+        "user_id": post.user_id,
+        "video_url": post.video_url  # Include video_url if present
+    } for post in user_posts]
+
+    return jsonify(posts_data), 200
