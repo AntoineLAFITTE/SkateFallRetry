@@ -38,7 +38,14 @@ const PostDetails = ({ post, onAddComment }) => {
                 )
             )}
 
-            <h3>Comments</h3>
+            {/* Display Username Before Comments */}
+            <h3 style={styles.postedBy}>
+                <strong>Posted by</strong> {post.username || "Unknown User"}
+            </h3>
+            <br></br>
+
+
+            <h3>Comments :</h3>
             {post.comments && post.comments.length > 0 ? (
                 <ul style={styles.commentList}>
                     {post.comments.map((comment, index) => (

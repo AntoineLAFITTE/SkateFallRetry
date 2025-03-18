@@ -79,8 +79,9 @@ def get_all_posts():
 @posts_bp.route('/<int:post_id>', methods=['GET'])
 @jwt_required()
 def get_post_by_id(post_id):
-    """Retrieve a single post, including video_url and comments."""
+    """Retrieve a single post, including video_url and comments and author username."""
     post = Post.query.get_or_404(post_id)
+    author = User.query.get(post.user_id)  # Get the user who created the post
 
     post_data = {
         "id": post.id,
@@ -88,6 +89,7 @@ def get_post_by_id(post_id):
         "content": post.content,
         "category": post.category,
         "user_id": post.user_id,
+        "username": author.username,  # Include username
         "video_url": post.video_url,  # Include video_url
         "comments": [
             {
