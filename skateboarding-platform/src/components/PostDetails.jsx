@@ -3,7 +3,40 @@ import React, { useState } from "react";
 const PostDetails = ({ post, onAddComment }) => {
     const [comment, setComment] = useState("");
 
-    if (!post) return <div style={styles.placeholder}>Select a post to view details</div>;
+    if (!post) return (
+      <div style={styles.placeholder}>
+          <h1 className="header-title">Skate Fall Retry</h1>
+          <br></br>
+          <h2>
+              SkateFallRetry is the ultimate platform for skateboarding enthusiasts.
+              Whether you're a beginner learning your first ollie, an advanced skater perfecting kickflips,
+              or an expert pushing the limits with technical tricks, our community-driven space has something for everyone.
+          </h2>
+          <h2>
+              Explore step-by-step trick tutorials, engage with the community,
+              share your knowledge with fellow skaters. Stay updated with the latest trends,
+              Browse Categories with new tricks and tips, posted by our members every day.
+          </h2>
+          <h2>
+              Thanks for joining us, you can now connect with passionate skaters, and take your skateboarding to the next level!
+          </h2>
+          <br></br>
+          <h2>
+              Follow us on social media 🔥
+          </h2>
+          <div style={styles.socialIcons}>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                <img src="/assets/instagram-icon.png" alt="Instagram" style={styles.icon} />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <img src="/assets/twitter-icon.png" alt="Twitter/X" style={styles.icon} />
+            </a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                <img src="/assets/facebook-icon.png" alt="Facebook" style={styles.icon} />
+            </a>
+        </div>
+      </div>
+  );
 
     const handleCommentSubmit = () => {
         if (comment.trim() !== "") {
@@ -42,7 +75,6 @@ const PostDetails = ({ post, onAddComment }) => {
             <h3 style={styles.postedBy}>
                 <strong>Posted by</strong> {post.username || "Unknown User"}
             </h3>
-            <br></br>
 
 
             <h3>Comments :</h3>
@@ -132,11 +164,36 @@ const styles = {
         backgroundColor: "#45A049",
     },
     placeholder: {
-        color: "#aaa",
+        color: "white",
         textAlign: "center",
-        paddingTop: "50px",
-        fontSize: "1.5rem",
-    },
+        padding: "20px 20px",
+        fontSize: "0.85rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        maxWidth: "900px",
+        margin: "0 auto",
+        lineHeight: "1.15",
+  },
+    socialIcons: {
+        display: "flex",
+        gap: "35px",
+        marginTop: "10px",
+        justifyContent: "center",
+  },
+  icon: {
+        width: "70px",
+        height: "70px",
+        borderRadius: "50%", // Makes icons round
+        objectFit: "cover",  // Ensures the image fills the circle
+        border: "2px solid white", // Optional: White border for clean look
+        transition: "opacity 0.3s",
+        cursor: "pointer",
+  },
+  iconHover: {
+      opacity: "0.7",
+  },
 };
 
 export default PostDetails;

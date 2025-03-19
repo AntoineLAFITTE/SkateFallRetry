@@ -41,8 +41,8 @@ const styles = {
         zIndex: "1000",
     },
     logoImage: {
-      width: "125px", // Adjust size of the logo
-      height: "125px",
+      width: "110px", // Adjust size of the logo
+      height: "110px",
       objectFit: "contain",
       cursor: "pointer",
     },
