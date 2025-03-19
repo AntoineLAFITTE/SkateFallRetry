@@ -8,6 +8,7 @@ const EditPost = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("Beginner");
+    const [videoUrl, setVideoUrl] = useState("");  // ✅ New state for Video URL
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,6 +25,7 @@ const EditPost = () => {
                 setTitle(data.title);
                 setContent(data.content);
                 setCategory(data.category);
+                setVideoUrl(data.video_url || "");  // ✅ Fetch existing video URL if available
             } else {
                 alert("Error fetching post data.");
             }
@@ -41,7 +43,7 @@ const EditPost = () => {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem("token")}`,
             },
-            body: JSON.stringify({ title, content, category }),
+            body: JSON.stringify({ title, content, category, video_url: videoUrl }), // ✅ Include video_url
         });
 
         if (response.ok) {
@@ -86,6 +88,16 @@ const EditPost = () => {
                             <option value="Advanced">Advanced</option>
                             <option value="Expert">Expert</option>
                         </select>
+
+                        {/* ✅ New Video URL Input Field */}
+                        <label style={styles.label}>Video URL (optional)</label>
+                        <input
+                            type="text"
+                            value={videoUrl}
+                            onChange={(e) => setVideoUrl(e.target.value)}
+                            placeholder="https://example.com/video.mp4"
+                            style={styles.input}
+                        />
 
                         <div style={styles.buttonContainer}>
                             <button type="submit" style={styles.button}>Update Post</button>
