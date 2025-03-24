@@ -389,7 +389,7 @@ body {
 
 @font-face {
   font-family: 'BirdsOfParadise';
-  src: url('public/assets/fonts/ROAD_RAGE.OTF') format('opentype');
+  src: url('/assets/fonts/ROAD_RAGE.OTF') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
