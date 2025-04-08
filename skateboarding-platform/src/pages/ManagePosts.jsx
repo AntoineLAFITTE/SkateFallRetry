@@ -16,7 +16,7 @@ const ManagePosts = () => {
             }
 
             try {
-                const response = await fetch("http://127.0.0.1:5000/api/posts/my-posts", {
+                const response = await fetch("https://skatefallretry.onrender.com/api/posts/my-posts", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
@@ -40,7 +40,7 @@ const ManagePosts = () => {
 
       try {
           const token = localStorage.getItem("token");
-          const response = await fetch(`http://127.0.0.1:5000/api/posts/${postId}`, {
+          const response = await fetch(`https://skatefallretry.onrender.com/api/posts/${postId}`, {
               method: "DELETE",
               headers: {
                   "Authorization": `Bearer ${token}`,

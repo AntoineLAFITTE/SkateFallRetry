@@ -9,7 +9,7 @@ const Register = () => {
     const handleRegister = async (event) => {
         event.preventDefault();
 
-        const response = await fetch('http://127.0.0.1:5000/api/auth/register', {
+        const response = await fetch('https://skatefallretry.onrender.com/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })

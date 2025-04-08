@@ -25,7 +25,7 @@ const CreatePost = () => {
         }
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/posts/create", {
+            const response = await fetch("https://skatefallretry.onrender.com/api/posts/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

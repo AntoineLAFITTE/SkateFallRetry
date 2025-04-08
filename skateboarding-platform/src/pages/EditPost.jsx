@@ -8,7 +8,7 @@ const EditPost = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("Beginner");
-    const [videoUrl, setVideoUrl] = useState("");  // ✅ New state for Video URL
+    const [videoUrl, setVideoUrl] = useState("");  //  New state for Video URL
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const EditPost = () => {
                 setTitle(data.title);
                 setContent(data.content);
                 setCategory(data.category);
-                setVideoUrl(data.video_url || "");  // ✅ Fetch existing video URL if available
+                setVideoUrl(data.video_url || "");  //  Fetch existing video URL if available
             } else {
                 alert("Error fetching post data.");
             }
@@ -37,13 +37,13 @@ const EditPost = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`http://127.0.0.1:5000/api/posts/${postId}`, {
+        const response = await fetch(`https://skatefallretry.onrender.com/api/posts/${postId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem("token")}`,
             },
-            body: JSON.stringify({ title, content, category, video_url: videoUrl }), // ✅ Include video_url
+            body: JSON.stringify({ title, content, category, video_url: videoUrl }), //  Include video_url
         });
 
         if (response.ok) {
@@ -89,7 +89,7 @@ const EditPost = () => {
                             <option value="Expert">Expert</option>
                         </select>
 
-                        {/* ✅ New Video URL Input Field */}
+                        {/*  New Video URL Input Field */}
                         <label style={styles.label}>Video URL (optional)</label>
                         <input
                             type="text"
