@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate, upgrade
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager  # Import JWTManager
+from flask_jwt_extended import JWTManager
 from config import Config
-from models import db  # Import only db, not individual models
+from models import db  # SQLAlchemy instance
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -15,7 +15,7 @@ jwt = JWTManager(app)
 # Initialize Database and Extensions
 db.init_app(app)
 migrate = Migrate(app, db)
-CORS(app)  # Keep CORS enabled
+CORS(app)
 
 # Import models after initializing db to prevent circular import
 from models.user import User
@@ -34,7 +34,12 @@ app.register_blueprint(posts_bp, url_prefix='/api/posts')
 app.register_blueprint(comments_bp, url_prefix='/api/comments')
 app.register_blueprint(videos_bp, url_prefix='/api/videos')
 
+# ✅ THIS MUST COME AFTER THE APP IS FULLY SET UP
+@app.before_request
+def apply_migrations_once():
+    if not hasattr(app, 'migrations_ran'):
+        upgrade()
+        app.migrations_ran = True
+
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()  # Ensure tables are created
     app.run(debug=True)
