@@ -35,11 +35,11 @@ app.register_blueprint(comments_bp, url_prefix='/api/comments')
 app.register_blueprint(videos_bp, url_prefix='/api/videos')
 
 #  THIS MUST COME AFTER THE APP IS FULLY SET UP
-@app.before_request
-def apply_migrations_once():
-    if not hasattr(app, 'migrations_ran'):
-        upgrade()
-        app.migrations_ran = True
+# @app.before_request
+# def apply_migrations_once():
+#    if not hasattr(app, 'migrations_ran'):
+#        upgrade()
+#        app.migrations_ran = True
 
 #  Ping route for health check
 @app.route("/ping")
