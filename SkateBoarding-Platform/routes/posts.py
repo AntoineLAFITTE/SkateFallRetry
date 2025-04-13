@@ -30,7 +30,7 @@ def create_post():
 def update_post(post_id):
     """Updates a post, including video_url."""
     post = Post.query.get_or_404(post_id)
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
 
     if post.user_id != user_id:
         return jsonify({'error': 'Unauthorized'}), 403
@@ -52,7 +52,7 @@ def update_post(post_id):
 def delete_post(post_id):
     """Deletes a post."""
     post = Post.query.get_or_404(post_id)
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
 
     if post.user_id != user_id:
         return jsonify({'error': 'Unauthorized'}), 403
