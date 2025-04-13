@@ -25,7 +25,7 @@ const CreatePost = () => {
         }
 
         try {
-            const response = await fetch("https://skatefallretry.onrender.com/api/posts/create", {
+            const response = await fetch("https://skatefallretry-production.up.railway.app/api/posts/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

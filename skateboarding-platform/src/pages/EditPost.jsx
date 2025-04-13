@@ -13,7 +13,7 @@ const EditPost = () => {
 
     useEffect(() => {
         const fetchPost = async () => {
-            const response = await fetch(`http://127.0.0.1:5000/api/posts/${postId}`, {
+            const response = await fetch(`https://skatefallretry-production.up.railway.app/api/posts/${postId}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -37,7 +37,7 @@ const EditPost = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`https://skatefallretry.onrender.com/api/posts/${postId}`, {
+        const response = await fetch(`https://skatefallretry-production.up.railway.app/api/posts/${postId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

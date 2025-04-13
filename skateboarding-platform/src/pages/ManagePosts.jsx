@@ -16,7 +16,7 @@ const ManagePosts = () => {
             }
 
             try {
-                const response = await fetch("https://skatefallretry.onrender.com/api/posts/my-posts", {
+                const response = await fetch("https://skatefallretry-production.up.railway.app/api/posts/my-posts", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
@@ -40,7 +40,7 @@ const ManagePosts = () => {
 
       try {
           const token = localStorage.getItem("token");
-          const response = await fetch(`https://skatefallretry.onrender.com/api/posts/${postId}`, {
+          const response = await fetch(`https://skatefallretry-production.up.railway.app/api/posts/${postId}`, {
               method: "DELETE",
               headers: {
                   "Authorization": `Bearer ${token}`,

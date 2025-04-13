@@ -20,7 +20,7 @@ const Home = () => {
 
     const fetchPosts = async (token) => {
         try {
-            const response = await fetch("https://skatefallretry.onrender.com/api/posts/", {
+            const response = await fetch("https://skatefallretry-production.up.railway.app/api/posts/", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -38,7 +38,7 @@ const Home = () => {
 
         const token = localStorage.getItem("token");
         try {
-            const response = await fetch(`https://skatefallretry.onrender.com/api/posts/${post.id}`, {
+            const response = await fetch(`https://skatefallretry-production.up.railway.app/api/posts/${post.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -54,7 +54,7 @@ const Home = () => {
         if (!selectedPost) return;
 
         const token = localStorage.getItem("token");
-        const response = await fetch(`https://skatefallretry.onrender.com/api/comments/create`, {
+        const response = await fetch(`https://skatefallretry-production.up.railway.app/api/comments/create`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
