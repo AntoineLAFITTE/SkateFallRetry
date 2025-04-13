@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, upgrade
+from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from config import Config
@@ -34,17 +34,30 @@ app.register_blueprint(posts_bp, url_prefix='/api/posts')
 app.register_blueprint(comments_bp, url_prefix='/api/comments')
 app.register_blueprint(videos_bp, url_prefix='/api/videos')
 
-#  THIS MUST COME AFTER THE APP IS FULLY SET UP
-# @app.before_request
-# def apply_migrations_once():
-#    if not hasattr(app, 'migrations_ran'):
-#        upgrade()
-#        app.migrations_ran = True
-
 #  Ping route for health check
 @app.route("/ping")
 def ping():
     return "pong"
 
+#  THIS MUST COME AFTER THE APP IS FULLY SET UP
+#@app.before_first_request
+#def apply_migrations_once():
+#    try:
+#        from flask_migrate import upgrade
+#        upgrade()
+#        print(" Migrations applied")
+#    except Exception as e:
+#        print(f" Migration failed: {e}")
+
+
 if __name__ == "__main__":
+    from flask_migrate import upgrade
+
+    with app.app_context():
+        try:
+            upgrade()
+            print("Migrations applied")
+        except Exception as e:
+            print(f" Migration failed: {e}")
+
     app.run(debug=True, host="0.0.0.0", port=8000)
